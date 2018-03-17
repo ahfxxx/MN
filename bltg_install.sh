@@ -1,4 +1,4 @@
-#!/bin/
+#!/bin/bash
 
 PS3='Please enter your choice: '
 options=("1. Bitcloin Lightning" "2. Vantaur" "3. Quit")
