@@ -1,4 +1,8 @@
 #!/bin/bash
+COIN=`Bitcoin_Lightning`
+DAEMON=`Bitcoin_Lightningd`
+RPCPORT=`17126`
+MNPORT=`17127`
 
 sudo touch /var/swap.img
 sudo chmod 600 /var/swap.img
@@ -31,34 +35,51 @@ cd ~
 git clone https://github.com/Bitcoinlightning/Bitcoin-Lightning.git
 cd ~/Bitcoin-Lightning/src
 make -f makefile.unix
-strip Bitcoin_Lightningd
-cp Bitcoin_Lightningd /usr/bin/
+strip ${DAEMON}
+cp ${DAEMON} /usr/bin/
 cd ~
 
-Bitcoin_Lightningd
+${DAEMON}
 
 sudo apt-get install -y pwgen
+GEN_USER=`pwgen -1 20 -n`
 GEN_PASS=`pwgen -1 40 -n`
 IP_ADD=`curl ipinfo.io/ip`
 
-cat > /root/.Bitcoin_Lightning/Bitcoin_Lightning.conf <<EOF
+cat > /root/.${COIN}/${COIN}.conf <<EOF
 
-rpcuser=ffer34sd423@#%dg5g24
+rpcuser=${GEN_USER}
 rpcpassword=${GEN_PASS}
 server=1
 listen=1
 maxconnections=256
 daemon=1
-port=17126
+port=${RPCPORT}
 rpcallowip=127.0.0.1
-masternodeaddr=${IP_ADD}:17127
+masternodeaddr=${IP_ADD}:${MNPORT}
 addnode:92.186.144.255
 
 EOF
 
 cd ~
-
 sleep 2
 
-Bitcoin_Lightningd
+${DAEMON}
 
+sleep 3
+PRIVKEY=`${DAEMON} masternode genkey`
+ADDRESS=`${DAEMON} getnewaddress MN1`
+${DAEMON} stop
+sleep 2
+
+echo -e "masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} " >> /root/.${COIN}/${COIN}.conf
+
+echo -e "masternode=1\n" >> /root/.${COIN}/${COIN}.conf
+echo -e "masternodeprivkey=${PRIVKEY}\n" >> /root/.${COIN}/${COIN}.conf
+echo -e "masternodeaddr=${IP_ADD}:${MNPORT}\n" >> /root/.${COIN}/${COIN}.conf
+echo "################################################################################"
+echo " "
+echo "Your Masternode Privkey : ${PRIVKEY}"
+echo "Transfer 3000 BLTG to address : ${ADDRESS}"
+echo " "
+echo "################################################################################"
