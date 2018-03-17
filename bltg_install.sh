@@ -1,28 +1,9 @@
 #!/bin/bash
 
-PS3='Please enter your choice: '
-options=("1. Bitcloin Lightning" "2. Vantaur" "3. Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "1. Bitcloin Lightning")
-            echo "Install Bitcoin Lightning"
-            COIN="Bitcoin_Lightning"
-            DAEMON="Bitcoin_Lightningd"
-            RPCPORT="17126"
-            MNPORT="17127"
-            ;;
-        "2. Vantaur")
-            echo "you chose choice 2"
-            ;;
-        "3. Quit")
-            exit 1
-            ;;
-        *) echo invalid option;;
-    esac
-done
-
-
+COIN="Bitcoin_Lightning"
+DAEMON="Bitcoin_Lightningd"
+RPCPORT="17126"
+MNPORT="17127"
 
 sudo touch /var/swap.img
 sudo chmod 600 /var/swap.img
