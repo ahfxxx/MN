@@ -56,7 +56,6 @@ maxconnections=256
 daemon=1
 port=${RPCPORT}
 rpcallowip=127.0.0.1
-masternodeaddr=${IP_ADD}:${MNPORT}
 addnode=92.186.144.255
 
 EOF
