@@ -72,11 +72,12 @@ ADDRESS=`${DAEMON} getnewaddress MN1`
 ${DAEMON} stop
 sleep 2
 
-echo -e "masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} " >> /root/.${COIN}/${COIN}.conf
+echo -e "masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} " >> /root/.${COIN}/masternode.conf
 
-echo -e "masternode=1\n" >> /root/.${COIN}/${COIN}.conf
-echo -e "masternodeprivkey=${PRIVKEY}\n" >> /root/.${COIN}/${COIN}.conf
-echo -e "masternodeaddr=${IP_ADD}:${MNPORT}\n" >> /root/.${COIN}/${COIN}.conf
+echo -e "masternode=1" >> /root/.${COIN}/${COIN}.conf
+echo -e "masternodeprivkey=${PRIVKEY}" >> /root/.${COIN}/${COIN}.conf
+echo -e "masternodeaddr=${IP_ADD}:${MNPORT}" >> /root/.${COIN}/${COIN}.conf
+
 echo "################################################################################"
 echo " "
 echo "Your Masternode Privkey : ${PRIVKEY}"
