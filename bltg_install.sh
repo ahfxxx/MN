@@ -1,8 +1,8 @@
 #!/bin/bash
-COIN=`Bitcoin_Lightning`
-DAEMON=`Bitcoin_Lightningd`
-RPCPORT=`17126`
-MNPORT=`17127`
+COIN="Bitcoin_Lightning"
+DAEMON="Bitcoin_Lightningd"
+RPCPORT="17126"
+MNPORT="17127"
 
 sudo touch /var/swap.img
 sudo chmod 600 /var/swap.img
@@ -57,7 +57,7 @@ daemon=1
 port=${RPCPORT}
 rpcallowip=127.0.0.1
 masternodeaddr=${IP_ADD}:${MNPORT}
-addnode:92.186.144.255
+addnode=92.186.144.255
 
 EOF
 
