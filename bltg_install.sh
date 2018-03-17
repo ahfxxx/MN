@@ -54,7 +54,7 @@ server=1
 listen=1
 maxconnections=256
 daemon=1
-port=${RPCPORT}
+#port=${RPCPORT}
 rpcallowip=127.0.0.1
 addnode=92.186.144.255
 
