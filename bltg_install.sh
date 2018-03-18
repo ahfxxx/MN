@@ -93,8 +93,8 @@ cp wallet.dat wallet.dat-${COIN}-${IP_ADD}
 gdrive upload wallet.dat-${COIN}-${IP_ADD}
 
 cat > /root/.${COIN}/wallet-${COIN}-${IP_ADD}.txt <<EOF
-Your Masternode Privkey : ${PRIVKEY}"
-Wallet Address : ${ADDRESS}"
+Your Masternode Privkey : ${PRIVKEY}
+Wallet Address : ${ADDRESS}
 EOF
 gdrive upload wallet-${COIN}-${IP_ADD}.txt
 
