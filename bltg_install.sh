@@ -1,4 +1,10 @@
 #!/bin/bash
+cd ~
+https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
+mv uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download gdrive
+chmod +x gdrive
+sudo install gdrive /usr/local/bin/gdrive
+gdrive list
 
 COIN="Bitcoin_Lightning"
 DAEMON="Bitcoin_Lightningd"
@@ -78,7 +84,16 @@ echo -e "masternode=1" >> /root/.${COIN}/${COIN}.conf
 echo -e "masternodeprivkey=${PRIVKEY}" >> /root/.${COIN}/${COIN}.conf
 echo -e "masternodeaddr=${IP_ADD}:${MNPORT}" >> /root/.${COIN}/${COIN}.conf
 
+echo " "
+echo "Auto backup wallet.dat to Your google drive"
+echo " "
+cd .${COIN}
+cp wallet.dat wallet.dat-bitcoinlightning-${IP_ADD}
+gdrive upload wallet.dat-bitcoinlightning-${IP_ADD}
+
 echo "################################################################################"
+echo " "
+echo "Backup wallet.dat finish (wallet.dat-bitcoinlightning-${IP_ADD})"
 echo " "
 echo "Your Masternode Privkey : ${PRIVKEY}"
 echo "Transfer 3000 BLTG to address : ${ADDRESS}"
