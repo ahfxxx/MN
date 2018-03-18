@@ -14,7 +14,6 @@ DAEMON="Bitcoin_Lightningd"
 RPCPORT="17126"
 MNPORT="17127"
 THEDATE=`date +"%Y%m%d-%H%M"`
-BACKUPWALLET="wallet-${COIN}-${IP_ADD}-${THEDATE}.txt"
 
 #sudo touch /var/swap.img
 #sudo chmod 600 /var/swap.img
@@ -90,6 +89,8 @@ PRIVKEY=`${DAEMON} masternode genkey`
 ADDRESS=`${DAEMON} getnewaddress MN1`
 ${DAEMON} stop
 sleep 2
+
+BACKUPWALLET="wallet-${COIN}-${IP_ADD}-${THEDATE}.txt"
 
 echo -e "masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} " >> /root/.${COIN}/masternode.conf
 
