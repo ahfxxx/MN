@@ -122,7 +122,7 @@ echo -e "After send 3000 BLTG, type ${CYAN}${DAEMON} masternode outputs ${NONE} 
 echo -e "If no value,type ${CYAN}masternode outputs ${NONE} in PC Wallet console"
 echo -e "edit file ${CYAN}masternode.conf ,${CYAN} nano /root/.${COIN}/masternode.conf ${NONE} and put:"
 echo " "
-echo -e " ${CYAN} masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} <TXID> <NO> ${NONE}
+echo -e " ${CYAN} masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} <TXID> <NO> ${NONE} "
 echo " "
 echo "################################################################################"
 
