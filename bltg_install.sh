@@ -30,12 +30,12 @@ sudo apt-get install -y build-essential libtool autotools-dev pkg-config libssl-
 sudo apt-get install libzmq3-dev libminiupnpc-dev libssl-dev libevent-dev -y
 sudo git clone https://github.com/bitcoin-core/secp256k1
 
-cd ~/secp256k1
-./autogen.sh
-./configure
-make
-./tests
-make install
+#cd ~/secp256k1
+#./autogen.sh
+#./configure
+#make
+#./tests
+#make install
 
 sudo apt-get install libgmp-dev -y
 sudo apt-get install openssl -y
@@ -43,13 +43,21 @@ sudo apt-get install software-properties-common && add-apt-repository ppa:bitcoi
 sudo apt-get update
 sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 
-cd ~
-git clone https://github.com/Bitcoinlightning/Bitcoin-Lightning.git
-cd ~/Bitcoin-Lightning/src
-make -f makefile.unix
-strip ${DAEMON}
-cp ${DAEMON} /usr/bin/
-cd ~
+#cd ~
+#git clone https://github.com/Bitcoinlightning/Bitcoin-Lightning.git
+#cd ~/Bitcoin-Lightning/src
+#make -f makefile.unix
+#strip ${DAEMON}
+#cp ${DAEMON} /usr/bin/
+#cd ~
+
+    wget https://github.com/Bitcoinlightning/Bitcoin-Lightning/releases/download/v1.1.0.0/Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+    tar xvzf Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+    rm Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+    chmod 755 ${DAEMON}
+    strip ${DAEMON}
+    sudo mv ${DAEMON} /usr/bin
+    cd
 
 ${DAEMON}
 
