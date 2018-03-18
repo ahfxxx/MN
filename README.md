@@ -1,4 +1,5 @@
-# MN
+# Bitcoin Lightning Masternode Setup
+
 Follow this step to install Bitcoin Lightning masternode with auto backup wallet.dat to your google drive.
 ```
 wget https://raw.githubusercontent.com/akramjannah/MN/master/bltg_install.sh
