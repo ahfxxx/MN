@@ -11,6 +11,7 @@ DAEMON="Bitcoin_Lightningd"
 RPCPORT="17126"
 MNPORT="17127"
 THEDATE=`date +"%Y%m%d-%H%M"`
+BACKUPWALLET="wallet.dat-${COIN}-${IP_ADD}-${THEDATE}.txt"
 
 sudo touch /var/swap.img
 sudo chmod 600 /var/swap.img
@@ -89,18 +90,19 @@ echo " "
 echo "Auto backup wallet.dat to Your google drive"
 echo " "
 cd .${COIN}
-cp wallet.dat wallet.dat-${COIN}-${IP_ADD}
-gdrive upload wallet.dat-${COIN}-${IP_ADD}
 
-cat > /root/.${COIN}/wallet-${COIN}-${IP_ADD}.txt <<EOF
+cp wallet.dat ${BACKUPWALLET}
+gdrive upload ${BACKUPWALLET}
+
+cat > /root/.${COIN}/${BACKUPWALLET} <<EOF
 Your Masternode Privkey : ${PRIVKEY}
 Wallet Address : ${ADDRESS}
 EOF
-gdrive upload wallet-${COIN}-${IP_ADD}.txt
+gdrive upload ${BACKUPWALLET}
 
 echo "################################################################################"
 echo " "
-echo "Backup wallet.dat finish (wallet.dat-bitcoinlightning-${IP_ADD})"
+echo "Backup wallet.dat finish (${BACKUPWALLET})"
 echo " "
 echo "Your Masternode Privkey : ${PRIVKEY}"
 echo "Transfer 3000 BLTG to address : ${ADDRESS}"
