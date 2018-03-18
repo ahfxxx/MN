@@ -6,6 +6,9 @@ chmod +x gdrive
 sudo install gdrive /usr/local/bin/gdrive
 gdrive list
 
+NONE='\033[00m'
+CYAN='\033[01;36m'
+
 COIN="Bitcoin_Lightning"
 DAEMON="Bitcoin_Lightningd"
 RPCPORT="17126"
@@ -87,7 +90,7 @@ echo -e "masternodeprivkey=${PRIVKEY}" >> /root/.${COIN}/${COIN}.conf
 echo -e "masternodeaddr=${IP_ADD}:${MNPORT}" >> /root/.${COIN}/${COIN}.conf
 
 echo " "
-echo "Auto backup wallet.dat to Your google drive"
+echo "${CYAN} Auto backup wallet.dat to Your google drive ${NONE}"
 echo " "
 cd .${COIN}
 
@@ -102,10 +105,16 @@ gdrive upload ${BACKUPWALLET}
 
 echo "################################################################################"
 echo " "
-echo "Backup wallet.dat finish (${BACKUPWALLET})"
+echo "Backup wallet.dat finish ${CYAN}(${BACKUPWALLET}) ${NONE}"
 echo " "
-echo "Your Masternode Privkey : ${PRIVKEY}"
-echo "Transfer 3000 BLTG to address : ${ADDRESS}"
+echo "Your Masternode Privkey :${CYAN} ${PRIVKEY} ${NONE}"
+echo "Transfer 3000 BLTG to address :${CYAN} ${ADDRESS} ${NONE}"
+echo " "
+echo "After send 3000 BLTG, type ${CYAN}${DAEMON} masternode outputs ${NONE} in VPS"
+echo "If no value,type ${CYAN}masternode outputs ${NONE} in PC Wallet console"
+echo "edit file ${CYAN}masternode.conf ,${CYAN} nano /root/.${COIN}/masternode.conf ${NONE} and put:"
+echo " "
+echo " ${CYAN} masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} <TXID> <NO> ${NONE}
 echo " "
 echo "################################################################################"
 
