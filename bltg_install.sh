@@ -98,7 +98,7 @@ echo -e "masternodeprivkey=${PRIVKEY}" >> /root/.${COIN}/${COIN}.conf
 echo -e "masternodeaddr=${IP_ADD}:${MNPORT}" >> /root/.${COIN}/${COIN}.conf
 
 echo " "
-echo "${CYAN} Auto backup wallet.dat to Your google drive ${NONE}"
+echo -e "${CYAN} Auto backup wallet.dat to Your google drive ${NONE}"
 echo " "
 cd .${COIN}
 
@@ -111,18 +111,18 @@ Wallet Address : ${ADDRESS}
 EOF
 gdrive upload ${BACKUPWALLET}
 
-echo "################################################################################"
+echo -e "################################################################################"
 echo " "
-echo "Backup wallet.dat finish ${CYAN}(${BACKUPWALLET}) ${NONE}"
+echo -e "Backup wallet.dat finish ${CYAN}(${BACKUPWALLET}) ${NONE}"
 echo " "
-echo "Your Masternode Privkey :${CYAN} ${PRIVKEY} ${NONE}"
-echo "Transfer 3000 BLTG to address :${CYAN} ${ADDRESS} ${NONE}"
+echo -e "Your Masternode Privkey :${CYAN} ${PRIVKEY} ${NONE}"
+echo -e "Transfer 3000 BLTG to address :${CYAN} ${ADDRESS} ${NONE}"
 echo " "
-echo "After send 3000 BLTG, type ${CYAN}${DAEMON} masternode outputs ${NONE} in VPS"
-echo "If no value,type ${CYAN}masternode outputs ${NONE} in PC Wallet console"
-echo "edit file ${CYAN}masternode.conf ,${CYAN} nano /root/.${COIN}/masternode.conf ${NONE} and put:"
+echo -e "After send 3000 BLTG, type ${CYAN}${DAEMON} masternode outputs ${NONE} in VPS"
+echo -e "If no value,type ${CYAN}masternode outputs ${NONE} in PC Wallet console"
+echo -e "edit file ${CYAN}masternode.conf ,${CYAN} nano /root/.${COIN}/masternode.conf ${NONE} and put:"
 echo " "
-echo " ${CYAN} masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} <TXID> <NO> ${NONE}
+echo -e " ${CYAN} masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} <TXID> <NO> ${NONE}
 echo " "
 echo "################################################################################"
 
