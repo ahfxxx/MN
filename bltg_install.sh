@@ -1,13 +1,26 @@
 #!/bin/bash
+
+NONE='\033[00m'
+CYAN='\033[01;36m'
+RED='\033[01;31m'
+GREEN='\033[01;32m'
+
+echo "[1/${MAX}] Checking Ubuntu version..."
+if [[ `cat /etc/issue.net`  == *16.04* ]]; then
+    echo -e "${GREEN}* You are running `cat /etc/issue.net` . Setup will continue.${NONE}";
+else
+    echo -e "${RED}* You are not running Ubuntu 16.04.X. You are running `cat /etc/issue.net` ${NONE}";
+    echo && echo "Installation cancelled" && echo;
+    exit;
+fi
+
+
 cd ~
 wget "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"
 mv "uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" gdrive
 chmod +x gdrive
 sudo install gdrive /usr/local/bin/gdrive
 gdrive list
-
-NONE='\033[00m'
-CYAN='\033[01;36m'
 
 IP_ADD=`curl ipinfo.io/ip`
 COIN="Bitcoin_Lightning"
