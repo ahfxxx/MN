@@ -9,11 +9,13 @@ gdrive list
 NONE='\033[00m'
 CYAN='\033[01;36m'
 
+IP_ADD=`curl ipinfo.io/ip`
 COIN="Bitcoin_Lightning"
 DAEMON="Bitcoin_Lightningd"
 RPCPORT="17126"
 MNPORT="17127"
 THEDATE=`date +"%Y%m%d-%H%M"`
+BACKUPWALLET="wallet-${COIN}-${IP_ADD}-${THEDATE}.txt"
 
 #sudo touch /var/swap.img
 #sudo chmod 600 /var/swap.img
@@ -50,47 +52,43 @@ sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 #cp ${DAEMON} /usr/bin/
 #cd ~
 
-    wget https://github.com/Bitcoinlightning/Bitcoin-Lightning/releases/download/v1.1.0.0/Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
-    tar xvzf Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
-    rm Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
-    chmod 755 ${DAEMON}
-    strip ${DAEMON}
-    sudo mv ${DAEMON} /usr/bin
-    cd
+wget https://github.com/Bitcoinlightning/Bitcoin-Lightning/releases/download/v1.1.0.0/Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+tar xvzf Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+rm Bitcoin_Lightning-Daemon-1.1.0.0.tar.gz
+chmod 755 ${DAEMON}
+strip ${DAEMON}
+sudo mv ${DAEMON} /usr/bin
+cd
 
 ${DAEMON}
 
-sudo apt-get install -y pwgen
-GEN_USER=`pwgen -1 20 -n`
-GEN_PASS=`pwgen -1 40 -n`
-IP_ADD=`curl ipinfo.io/ip`
+GEN_USER=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+GEN_PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 cat > /root/.${COIN}/${COIN}.conf <<EOF
-
 rpcuser=${GEN_USER}
 rpcpassword=${GEN_PASS}
 server=1
 listen=1
-maxconnections=256
 daemon=1
+staking=1
+discover=1
+rpcthreads=8
+maxconnections=256
 #port=${RPCPORT}
 rpcallowip=127.0.0.1
 addnode=92.186.144.255
-
 EOF
 
 cd ~
 sleep 2
-
 ${DAEMON}
-
 sleep 3
+
 PRIVKEY=`${DAEMON} masternode genkey`
 ADDRESS=`${DAEMON} getnewaddress MN1`
 ${DAEMON} stop
 sleep 2
-
-BACKUPWALLET="wallet-${COIN}-${IP_ADD}-${THEDATE}.txt"
 
 echo -e "masternode1 ${IP_ADD}:${MNPORT} ${PRIVKEY} " >> /root/.${COIN}/masternode.conf
 
@@ -110,7 +108,7 @@ echo -e "Your Masternode Privkey : ${PRIVKEY}" >> /root/.${COIN}/${BACKUPWALLET}
 echo -e "Wallet Address : ${ADDRESS}" >> /root/.${COIN}/${BACKUPWALLET}
 
 gdrive upload ${BACKUPWALLET}
-
+echo " "
 echo -e "################################################################################"
 echo " "
 echo -e "Backup wallet.dat finish ${CYAN}(${BACKUPWALLET}) ${NONE}"
