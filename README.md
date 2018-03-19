@@ -1,11 +1,11 @@
 # Bitcoin Lightning Masternode Setup
 
 Requirement
-==========
+-----------
 ubuntu 16.04 x64
 
 How to install
-==============
+--------------
 
 Follow this step to install Bitcoin Lightning masternode with auto backup wallet.dat to your google drive.
 ```
