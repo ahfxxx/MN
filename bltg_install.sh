@@ -22,6 +22,10 @@ chmod +x gdrive
 sudo install gdrive /usr/local/bin/gdrive
 gdrive list
 
+sudo apt-get -y install fail2ban
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
+    
 IP_ADD=`curl ipinfo.io/ip`
 COIN="Bitcoin_Lightning"
 DAEMON="Bitcoin_Lightningd"
