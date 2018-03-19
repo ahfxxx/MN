@@ -15,5 +15,5 @@ chmod +x bltg_install.sh
 
 ./bltg_install.sh
 ```
-- Copy google link at your VPS to create authrize code from website
-- Copy authrize code and paste to VPS
+- Copy google link at your VPS to create authorize code from website
+- Copy authorize code and paste to VPS
